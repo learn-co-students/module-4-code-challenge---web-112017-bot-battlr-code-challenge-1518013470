@@ -2,7 +2,9 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
-  //your bot army code here...
+  constructor(props){
+    super(props)
+  }
 
   render(){
     return (
@@ -16,7 +18,7 @@ class YourBotArmy extends React.Component {
       </div>
     );
   }
-  
+
 };
 
 export default YourBotArmy;
