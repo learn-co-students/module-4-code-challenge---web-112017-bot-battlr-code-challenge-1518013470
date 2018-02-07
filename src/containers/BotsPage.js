@@ -3,7 +3,7 @@ import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 
 class BotsPage extends React.Component {
-  //start here with your code for step one
+
   state = {
     bots: [],
     army: []
@@ -32,7 +32,6 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.army);
     return (
       <div>
         <YourBotArmy army={this.state.army} removeArmy={this.removeArmy}/>
