@@ -16,13 +16,16 @@ class BotsPage extends React.Component {
   }
 
   handleSelectBots = (option) => {
-    this.setState({
-      selectedBot: option
+    this.setState(previousState => {
+      return {
+        selectedBot: option,
+        armyBots: [...previousState.armyBots, this.state.selectedBot]
+      }
+
     })
   }
 
   //HAVE MY SELECTED BOT BUT NEED TO ADD IT INTO MY ARMY ARRAY
-
   // addToArmy = () => {
   //   this.setState(previousState => {
   //     //armyBots: this.state.armyBots.push(this.state.selectedBot)
@@ -38,7 +41,7 @@ class BotsPage extends React.Component {
     console.log(this.state)
     return (
       <div>
-        <YourBotArmy  selectedBot={this.state.selectedBot}/>
+        <YourBotArmy  selectedBot={this.state.selectedBot} armyBots={this.state.armyBots}/>
         <BotCollection bots={this.state.bots} handleSelectBots={this.handleSelectBots}/>
       </div>
     );
