@@ -2,12 +2,14 @@ import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
+import BotSearch from '../components/BotSearch'
 
 class BotsPage extends React.Component {
   state = {
     bots: [],
     army: [],
-    specBot: null
+    specBot: null,
+    filter: ""
   }
 
   componentDidMount = () => {
@@ -41,11 +43,22 @@ class BotsPage extends React.Component {
     })
   }
 
+  changeFilter = (e) => {
+    this.setState({
+      filter: e.target.value
+    })
+  }
+
   render() {
     return (
       <div>
+        <BotSearch changeFilter={ this.changeFilter } />
         <YourBotArmy army={ this.state.army } handleArmyStatus={ this.removeBotFromArmy }/>
-        {!this.state.specBot && <BotCollection bots={ this.state.bots } loadSpecs={ this.loadSpecs }/>}
+        {!this.state.specBot && <BotCollection
+                                  bots={ this.state.bots }
+                                  loadSpecs={ this.loadSpecs }
+                                  filter={this.state.filter}
+                                  />}
         {this.state.specBot && <BotSpecs
                                   bot={ this.state.specBot }
                                   goBack={ this.loadSpecs }
