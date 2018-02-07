@@ -25,7 +25,6 @@ class BotsPage extends React.Component {
   showHelper =(id)=> {
     let found = this.state.allBots.find(bot => bot.id == id)
     this.setState({showingOne: true, oneBot: found})
-    console.log(this.state)
   }
 
   handleBackClick = () => {
@@ -42,7 +41,6 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        this.showHelper()
         <YourBotArmy
           army={this.state.armyBots.length >0 ? this.state.armyBots : []}/>
         {this.state.showingOne ? <BotSpecs bot={this.state.oneBot}
