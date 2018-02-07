@@ -53,11 +53,15 @@ class BotsPage extends React.Component {
     })
   }
 
+  showSpecs = (e) => {
+    console.log(`show specs for ${e}`);
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy botRoster={this.state.botRoster} removeBot={this.removeBot} />
-        <BotCollection bots={this.state.bots} enlistBot={this.enlistBot} />
+        <BotCollection bots={this.state.bots} showSpecs={this.showSpecs} />
       </div>
     );
   }
