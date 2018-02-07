@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -9,7 +10,8 @@ class BotsPage extends React.Component {
 
     this.state = {
       allBots: [],
-      yourArmyBots: []
+      yourArmyBots: [],
+      viewBot: null
     }
   }
 
@@ -44,11 +46,29 @@ class BotsPage extends React.Component {
     })
   }
 
+  setViewBot = (bot) => {
+    this.setState({
+      viewBot: bot
+    })
+  }
+
+  resetViewBot = () => {
+    this.setState({
+      viewBot: null
+    }, console.log('viewBot state is null'))
+  }
+
   render() {
+    let viewBotDisplay;
+    if (this.state.viewBot){
+      viewBotDisplay = <BotSpecs bot={this.state.viewBot} showAllBotsFunction={this.resetViewBot} addBotsFunction={this.addToArmy} />
+    } else {
+      viewBotDisplay = <BotCollection allBots={this.state.allBots} clickBotFunction={this.setViewBot} />
+    }
     return (
       <div>
         <YourBotArmy yourArmyBots={this.state.yourArmyBots} clickBotFunction={this.removeFromArmy}/>
-        <BotCollection allBots={this.state.allBots} clickBotFunction={this.addToArmy} />
+        {viewBotDisplay}
       </div>
     );
   }
