@@ -1,12 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     allBots: [],
-    armyBots: []
+    armyBots: [],
+    showingOne: false,
+    oneBot: {}
   }
 
   fetchBots = () => {
@@ -19,20 +22,25 @@ class BotsPage extends React.Component {
     this.fetchBots()
   }
 
-  armyHelper =(id)=> {
+  showHelper =(id)=> {
     let found = this.state.allBots.find(bot => bot.id == id)
-    if (!this.state.armyBots.includes(found)) {
-      this.setState({armyBots: [...this.state.armyBots, found]})
-    }
+    this.setState({showingOne: true, oneBot: found})
+    console.log(this.state)
   }
 
   render() {
     return (
       <div>
+        this.showHelper()
         <YourBotArmy
           army={this.state.armyBots.length >0 ? this.state.armyBots : []}/>
+        {this.state.showingOne ? <BotSpecs bot={this.state.oneBot}/> :
         <BotCollection
-          bots={this.state.allBots} armyHelper={this.armyHelper}/>
+          bots={this.state.allBots}
+          showHelper={this.showHelper}/>
+        }
+
+
       </div>
     );
   }
