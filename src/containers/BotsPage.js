@@ -8,7 +8,8 @@ class BotsPage extends React.Component {
     super(props);
 
     this.state = {
-      allBots: []
+      allBots: [],
+      yourArmyBots: []
     }
   }
 
@@ -24,15 +25,33 @@ class BotsPage extends React.Component {
     .then(res => res.json())
   }
 
+  addToArmy = (bot) => {
+      if (!this.state.yourArmyBots.find((item) => item===bot)){
+        this.setState({
+          yourArmyBots: [...this.state.yourArmyBots, bot]
+        })
+      } else {
+        alert("This bot has already been added")
+      }
+  }
+
+  removeFromArmy = (bot) => {
+    let currentBots = this.state.yourArmyBots
+    let index = currentBots.indexOf(bot)
+    currentBots.splice(index,1)
+    this.setState({
+      yourArmyBots: currentBots
+    })
+  }
+
   render() {
     return (
       <div>
-        <YourBotArmy />
-        <BotCollection allBots={this.state.allBots} />
+        <YourBotArmy yourArmyBots={this.state.yourArmyBots} clickBotFunction={this.removeFromArmy}/>
+        <BotCollection allBots={this.state.allBots} clickBotFunction={this.addToArmy} />
       </div>
     );
   }
-
 
 
 }
