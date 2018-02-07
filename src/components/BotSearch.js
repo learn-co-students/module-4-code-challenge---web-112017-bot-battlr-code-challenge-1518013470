@@ -3,7 +3,8 @@ import React from 'react'
 const BotSearch = (props) => {
   return (
     <div>
-      <select onChange={ props.changeFilter }>
+      <h2>Filter The Bots</h2>
+      <select onChange={ props.changeFilter } value={ props.filter }>
         <option value="">None</option>
         <option>Assault</option>
         <option>Defender</option>

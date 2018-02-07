@@ -49,21 +49,33 @@ class BotsPage extends React.Component {
     })
   }
 
+  filteredBots() {
+    return this.state.bots.filter(b => b.bot_class.includes(this.state.filter))
+  }
+
   render() {
     return (
       <div>
-        <BotSearch changeFilter={ this.changeFilter } />
-        <YourBotArmy army={ this.state.army } handleArmyStatus={ this.removeBotFromArmy }/>
-        {!this.state.specBot && <BotCollection
-                                  bots={ this.state.bots }
-                                  loadSpecs={ this.loadSpecs }
-                                  filter={this.state.filter}
-                                  />}
-        {this.state.specBot && <BotSpecs
-                                  bot={ this.state.specBot }
-                                  goBack={ this.loadSpecs }
-                                  enlist={ this.addBotToArmy }
-                                  />}
+        <YourBotArmy
+          army={ this.state.army }
+          handleArmyStatus={ this.removeBotFromArmy }
+        />
+        {this.state.specBot ?
+          <BotSpecs
+            bot={ this.state.specBot }
+            goBack={ this.loadSpecs }
+            enlist={ this.addBotToArmy }
+            /> :
+          <div>
+            <BotSearch
+              changeFilter={ this.changeFilter }
+              filter={ this.state.filter }/>
+            <BotCollection
+              bots={ this.filteredBots() }
+              loadSpecs={ this.loadSpecs }
+              />
+          </div>
+        }
       </div>
     );
   }
