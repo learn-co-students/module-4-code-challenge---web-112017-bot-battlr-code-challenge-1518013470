@@ -1,12 +1,14 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    army: []
+    army: [],
+    currentBot: ""
   }
 
   componentDidMount() {
@@ -31,11 +33,34 @@ class BotsPage extends React.Component {
     }
   }
 
+  toggleCurrentBot = (bot) => {
+    if (this.state.currentBot === "") {
+      this.setState({ currentBot: bot })
+    } else {
+      this.setState({ currentBot: "" })
+    }
+  }
+
+  renderPage = () => {
+    if (this.state.currentBot === "") {
+      return <BotCollection
+        bots={this.state.bots}
+        toggleCurrentBot={this.toggleCurrentBot} />
+    } else {
+      return <BotSpecs
+        bot={this.state.currentBot}
+        toggleCurrentBot={this.toggleCurrentBot}
+        removeArmy={this.removeArmy}
+        army={this.state.army}
+        addArmy={this.addArmy}/>
+    }
+  }
+
   render() {
     return (
       <div>
-        <YourBotArmy army={this.state.army} removeArmy={this.removeArmy}/>
-        <BotCollection bots={this.state.bots} addArmy={this.addArmy} />
+        <YourBotArmy army={this.state.army} toggleCurrentBot={this.toggleCurrentBot}/>
+        {this.renderPage()}
       </div>
     );
   }

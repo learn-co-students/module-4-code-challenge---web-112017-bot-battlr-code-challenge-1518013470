@@ -2,11 +2,14 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class BotCollection extends React.Component {
-  //your code here
+
   renderBots = () => {
     if (this.props.bots !== []) {
       return this.props.bots.map(bot => {
-        return <BotCard key={bot.id} bot={bot} handleArmy={this.props.addArmy}/>
+        return <BotCard
+          bot={bot}
+          key={bot.id}
+          toggleCurrentBot={this.props.toggleCurrentBot}/>
       })
     }
   }
