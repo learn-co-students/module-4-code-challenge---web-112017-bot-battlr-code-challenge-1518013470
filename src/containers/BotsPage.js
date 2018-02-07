@@ -28,19 +28,30 @@ class BotsPage extends React.Component {
     console.log(this.state)
   }
 
+  handleBackClick = () => {
+    this.setState({showingOne: false, oneBot: {}})
+  }
+
+  armyAdder = (event) => {
+    let armyGuy = this.state.allBots.find(bot => bot.id == event.target.id)
+    if (!this.state.armyBots.includes(armyGuy)) {
+      this.setState({armyBots: [...this.state.armyBots, armyGuy]})
+    }
+  }
+
   render() {
     return (
       <div>
         this.showHelper()
         <YourBotArmy
           army={this.state.armyBots.length >0 ? this.state.armyBots : []}/>
-        {this.state.showingOne ? <BotSpecs bot={this.state.oneBot}/> :
+        {this.state.showingOne ? <BotSpecs bot={this.state.oneBot}
+        handleBackClick={this.handleBackClick}
+        armyAdder={this.armyAdder}/> :
         <BotCollection
           bots={this.state.allBots}
           showHelper={this.showHelper}/>
         }
-
-
       </div>
     );
   }
