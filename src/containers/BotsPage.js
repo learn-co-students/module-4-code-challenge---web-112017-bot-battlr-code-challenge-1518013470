@@ -13,7 +13,7 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy botArmy={this.state.botArmy}/>
+        <YourBotArmy addBotToArmy={this.addBotToArmy} botArmy={this.state.botArmy}/>
         <BotCollection addBotToArmy={this.addBotToArmy} allBots={this.state.allBots}/>
         {/* put your components here */}
       </div>
@@ -32,8 +32,10 @@ class BotsPage extends React.Component {
   }
 
   addBotToArmy = (bot) => {
-    this.setState({botArmy: [...this.state.botArmy, bot]})
-    console.log(this.state.botArmy);
+    if (!this.state.botArmy.includes(bot))
+      {this.setState((prevState, props) => ({botArmy: [...prevState.botArmy, bot]}))}
+    else {
+      this.setState((prevState, props) => ({botArmy: prevState.botArmy.filter((_, i) => i !== (prevState.botArmy.indexOf(bot)))}))}
   }
 
 
