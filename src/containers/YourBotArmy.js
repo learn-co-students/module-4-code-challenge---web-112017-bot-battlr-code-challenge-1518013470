@@ -4,9 +4,6 @@ import BotCard from "../components/BotCard";
 class YourBotArmy extends React.Component {
 
   //ITERATE OVER EACH BOT IN MY ARMY AND DISPLAY USING THE SELECTED BOT BEING PASSED DOWN FROM PROPS, THEN CALL myBotArmy IN RENDER
-
-
-
   render(){
     let myBotArmy = this.props.armyBots.map(bot => <BotCard bot={bot} key={bot.name}/>)
     return (

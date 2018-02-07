@@ -24,7 +24,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.handleSelectBots(props.bot)}
+        onClick={() => props.handleSelectBots(props.bot)} 
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
@@ -38,7 +38,7 @@ const BotCard = props => {
             <small>{bot.catchphrase}</small>
           </div>
         </div>
-        <div className="extra content">
+        <div className="extra content" >
           <span>
             <i className="icon heartbeat" />
             {bot.health}

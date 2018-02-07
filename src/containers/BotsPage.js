@@ -7,6 +7,7 @@ class BotsPage extends React.Component {
     bots: [],
     selectedBot: '',
     armyBots: [],
+    detailDisplay: false
   }
 
   componentDidMount = () => {
@@ -21,20 +22,19 @@ class BotsPage extends React.Component {
         selectedBot: option,
         armyBots: [...previousState.armyBots, this.state.selectedBot]
       }
-
     })
   }
 
-  //HAVE MY SELECTED BOT BUT NEED TO ADD IT INTO MY ARMY ARRAY
-  // addToArmy = () => {
-  //   this.setState(previousState => {
-  //     //armyBots: this.state.armyBots.push(this.state.selectedBot)
-  //     return {
-  //       armyBots: [...previousState.armyBots, this.state.selectedBot]
-  //     }
-  //
-  //   })
-  // }
+  //Ran out of time to finish showing the BotSpecs
+  handleDetailDisplay = (event) => {
+    debugger;
+    event.preventDefault();
+    this.setState(previousState => {
+      return {
+        detailDisplay: !previousState.detailDisplay
+      }
+    })
+  }
 
 
   render() {
@@ -42,7 +42,7 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy  selectedBot={this.state.selectedBot} armyBots={this.state.armyBots}/>
-        <BotCollection bots={this.state.bots} handleSelectBots={this.handleSelectBots}/>
+        <BotCollection bots={this.state.bots} handleSelectBots={this.handleSelectBots} detailDisplay={this.state.detailDisplay} handleDetailDisplay={this.handleDetailDisplay}/>
       </div>
     );
   }
