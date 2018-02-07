@@ -2,13 +2,15 @@ import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
+import Search from '../components/Search'
 
 class BotsPage extends React.Component {
 
   state = {
     bots: [],
     army: [],
-    currentBot: ""
+    currentBot: "",
+    searchTerm: ""
   }
 
   componentDidMount() {
@@ -41,10 +43,15 @@ class BotsPage extends React.Component {
     }
   }
 
+  changeSearchTerm = (input) => {
+    this.setState({ searchTerm: input })
+  }
+
   renderPage = () => {
     if (this.state.currentBot === "") {
       return <BotCollection
         bots={this.state.bots}
+        searchTerm={this.state.searchTerm}
         toggleCurrentBot={this.toggleCurrentBot} />
     } else {
       return <BotSpecs
@@ -60,9 +67,11 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy army={this.state.army} toggleCurrentBot={this.toggleCurrentBot}/>
+        <Search changeSearchTerm={this.changeSearchTerm}/>
+        <br />
         {this.renderPage()}
       </div>
-    );
+    )
   }
 
 }

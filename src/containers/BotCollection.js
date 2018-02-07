@@ -2,10 +2,23 @@ import React from "react";
 import BotCard from "../components/BotCard";
 
 class BotCollection extends React.Component {
+  searchBots = () => {
+    return this.props.bots.filter(bot => {
+      let botName = bot.name.toLowerCase()
+      return botName.includes(this.props.searchTerm.toLowerCase())
+    })
+  }
 
   renderBots = () => {
-    if (this.props.bots !== []) {
-      return this.props.bots.map(bot => {
+    let botResults = this.props.bots;
+
+    if (this.props.searchTerm !== "") {
+       botResults = this.searchBots()
+    }
+
+    if (botResults !== []) {
+
+      return botResults.map(bot => {
         return <BotCard
           bot={bot}
           key={bot.id}
