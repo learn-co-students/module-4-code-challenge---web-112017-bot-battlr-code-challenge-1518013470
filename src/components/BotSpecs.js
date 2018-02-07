@@ -69,12 +69,12 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() => {
-                {!props.army.includes(props.bot) ? props.addArmy(props.bot) : props.removeArmy(props.bot)}
+                {!props.army.includes(bot) ? props.addArmy(bot) : props.removeArmy(bot)}
                 props.toggleCurrentBot()
               }
               }
             >
-              {!props.army.includes(props.bot) ? "Enlist" : "Remove"}
+              {!props.army.includes(bot) ? "Enlist" : "Remove"}
             </button>
           </div>
         </div>
