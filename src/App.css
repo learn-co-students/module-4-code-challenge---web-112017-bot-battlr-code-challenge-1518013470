@@ -12,3 +12,19 @@
 .ui.grid {
   padding: 0px 20px;
 }
+
+.filter-bar {
+  display: block;
+  margin:auto;
+  border: none;
+  width: 90%;
+  font-size: 1.2em;
+}
+
+.filter-container {
+  margin: 20px auto;
+  width: 30%;
+  background-color: #b5cc18;
+  padding: 10px;
+  text-align: center;
+}
