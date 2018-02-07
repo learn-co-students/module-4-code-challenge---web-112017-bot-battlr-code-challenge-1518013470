@@ -1,6 +1,6 @@
 import React from "react";
 
-const BotCard = ({bot, addBotToArmy}) => {
+const BotCard = ({bot, onCardClick}) => {
 
   let botType;
 
@@ -23,7 +23,7 @@ const BotCard = ({bot, addBotToArmy}) => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => addBotToArmy(bot)}
+        onClick={() => onCardClick(bot)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
