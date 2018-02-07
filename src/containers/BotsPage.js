@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -8,16 +9,24 @@ class BotsPage extends React.Component {
   state = {
     allBots: [],
     botArmy: [],
+    botToRender: undefined,
   }
 
   render() {
-    return (
+    if (this.state.botToRender === undefined)
+    { return (
       <div>
         <YourBotArmy botOnClick={this.removeBotFromArmy} botArmy={this.state.botArmy}/>
-        <BotCollection botOnClick={this.addBotToArmy} allBots={this.state.allBots}/>
+        <BotCollection botOnClick={this.renderBotSpecs} allBots={this.state.allBots}/>
         {/* put your components here */}
       </div>
-    );
+    )} else {
+      return (<div>
+        <YourBotArmy botOnClick={this.removeBotFromArmy} botArmy={this.state.botArmy}/>
+        <BotSpecs bot={this.state.botToRender} addBotToArmy={this.addBotToArmy} showCollection={this.showCollection}/>
+        {/* put your components here */}
+      </div>)
+    }
   }
 
   componentDidMount() {
@@ -29,6 +38,14 @@ class BotsPage extends React.Component {
     const initRequestUrl = 'https://bot-battler-api.herokuapp.com/api/v1/bots'
     return fetch( initRequestUrl )
         .then(resp => resp.json())
+  }
+
+  renderBotSpecs = (bot) => {
+    this.setState({botToRender: bot})
+  }
+
+  showCollection = () => {
+    this.setState({botToRender: undefined})
   }
 
   addBotToArmy = (bot) => {
