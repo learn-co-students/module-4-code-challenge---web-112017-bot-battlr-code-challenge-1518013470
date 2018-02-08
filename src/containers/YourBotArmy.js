@@ -1,5 +1,5 @@
 import React from "react";
-import AltBotCard from "../components/BotCard";
+import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class YourBotArmy extends React.Component {
           <div className="row bot-army-row">
             Your Bot Army
             {this.props.yourBotArmy.map((bot) => {
-              return <AltBotCard handleBotRemove={this.props.handleBotRemove} bot={bot} key={bot.id}/>
+              return <BotCard handleBotClick={this.props.handleBotClick} bot={bot} key={bot.id} />
             })}
           </div>
         </div>

@@ -22,8 +22,14 @@ class BotsPage extends React.Component {
     }))
   }
 
+  handleBotClick = (bot) => {
+
+    this.state.yourBotArmy.includes(bot) ? this.handleBotRemove(bot) : this.handleBotEnlist(bot)
+
+  }
+
   handleBotEnlist = (bot) => {
-    console.log('hit')
+
     let currentArmy = this.state.yourBotArmy
     if (!this.state.yourBotArmy.includes(bot)) {
       this.setState({
@@ -36,11 +42,11 @@ class BotsPage extends React.Component {
   }
 
   handleBotRemove = (bot) => {
-    let currentArmy = this.state.yourBotArmy
+    const currentArmy = this.state.yourBotArmy.slice()
+    currentArmy.splice(this.state.yourBotArmy.indexOf(bot), 1)
     if (this.state.yourBotArmy.includes(bot)) {
-      currentArmy = this.state.yourBotArmy.splice(this.state.yourBotArmy.indexOf(bot), 1)
       this.setState({
-        yourBotArmy: [...currentArmy]
+        yourBotArmy: currentArmy
       })
     }
   }
@@ -48,8 +54,9 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <BotCollection allBots = {this.state.allBots} handleBotEnlist = {this.handleBotEnlist} />
-        <YourBotArmy yourBotArmy={this.state.yourBotArmy} handleBotRemove={this.handleBotRemove}/>
+        <YourBotArmy yourBotArmy={this.state.yourBotArmy} handleBotClick={this.handleBotClick}/>
+        <BotCollection allBots = {this.state.allBots} handleBotClick = {this.handleBotEnlist} />
+
       </div>
     );
   }
