@@ -3,9 +3,6 @@ import React from "react";
 import BotCard from "../components/BotCard"
 
 class BotCollection extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   render(){
 
@@ -15,7 +12,7 @@ class BotCollection extends React.Component {
     		  {/*...and here..*/}
     		  Collection of all bots
           {this.props.allBots.map((bot) => {
-            return <BotCard bot={bot} key={bot.id} handleBotClick={this.props.handleBotClick}/>
+            return <BotCard bot={bot} key={bot.id} handleToggleSpecStatus={this.props.handleToggleSpecStatus}/>
           })}
 
     		</div>

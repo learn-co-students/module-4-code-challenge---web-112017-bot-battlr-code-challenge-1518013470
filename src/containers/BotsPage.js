@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -10,7 +11,9 @@ class BotsPage extends React.Component {
 
     this.state = {
       allBots: [],
-      yourBotArmy: []
+      yourBotArmy: [],
+      specVisible: false,
+      currentBotSpec: ""
     }
   }
 
@@ -22,11 +25,6 @@ class BotsPage extends React.Component {
     }))
   }
 
-  handleBotClick = (bot) => {
-
-    this.state.yourBotArmy.includes(bot) ? this.handleBotRemove(bot) : this.handleBotEnlist(bot)
-
-  }
 
   handleBotEnlist = (bot) => {
 
@@ -39,6 +37,7 @@ class BotsPage extends React.Component {
     else {
       alert("Already enlisted")
     }
+    this.handleToggleSpecStatus()
   }
 
   handleBotRemove = (bot) => {
@@ -51,14 +50,52 @@ class BotsPage extends React.Component {
     }
   }
 
-  render() {
+  handleToggleSpecStatus = (bot) => {
+    const selectedBot = bot
+    const specVis = !this.state.specVisible
+    this.setState({
+      specVisible: specVis,
+      currentBotSpec: selectedBot
+    })
+  }
+
+  renderTernary = () => {
+    return this.state.specVisible ? this.handleRenderSpec() : this.handleRenderCollection()
+  }
+
+  handleRenderSpec = () => {
+
     return (
       <div>
-        <YourBotArmy yourBotArmy={this.state.yourBotArmy} handleBotClick={this.handleBotClick}/>
-        <BotCollection allBots = {this.state.allBots} handleBotClick = {this.handleBotEnlist} />
+          <BotSpecs bot = {this.state.currentBotSpec} handleBotEnlist = {this.handleBotEnlist} handleToggleSpecStatus={this.handleToggleSpecStatus} />
+      </div>
+    )
+  }
+
+  handleRenderCollection = () => {
+    return (
+
+      <div>
+        <BotCollection allBots = {this.state.allBots} handleToggleSpecStatus = {this.handleToggleSpecStatus} />
+      </div>
+  )
+  }
+
+
+
+
+  render() {
+    return(
+      <div>
+        <div>
+          <YourBotArmy yourBotArmy={this.state.yourBotArmy} handleToggleSpecStatus = {this.handleToggleSpecStatus} />
+        </div>
+        {this.renderTernary()}
 
       </div>
-    );
+
+    )
+
   }
 
 }
